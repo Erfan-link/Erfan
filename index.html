@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>دلتنگیِ عاشقانه‌ی من برای تو</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-deep:#080a1c;
+    --night-mid:#12173a;
+    --night-soft:#1c2352;
+    --rose-glow:#e8a3b6;
+    --rose-soft:#f0c2cf;
+    --gold-glow:#e8c078;
+    --gold-soft:#f3dcae;
+    --lavender-text:#ece7f5;
+    --muted-blue:#9aa1cf;
+    --card-border:rgba(232,163,182,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html,body{
+    height:100%;
+    background:var(--night-deep);
+    overflow-x:hidden;
+  }
+
+  body{
+    font-family:'Noto Naskh Arabic','Vazirmatn',serif;
+    color:var(--lavender-text);
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:min(6vh,48px) 18px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ---------- Background layers ---------- */
+  #stars{
+    position:fixed; inset:0; z-index:0; display:block; width:100%; height:100%;
+  }
+
+  .sky-gradient{
+    position:fixed; inset:0; z-index:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 8%, rgba(232,163,182,0.10), transparent 60%),
+      radial-gradient(ellipse 60% 45% at 85% 85%, rgba(232,192,120,0.08), transparent 60%),
+      linear-gradient(180deg, var(--night-deep) 0%, var(--night-mid) 55%, var(--night-deep) 100%);
+  }
+
+  .nebula{
+    position:fixed; inset:0; z-index:0; pointer-events:none; filter:blur(60px); opacity:0.55;
+  }
+  .nebula span{
+    position:absolute; border-radius:50%;
+    mix-blend-mode:screen;
+  }
+  .nebula span:nth-child(1){
+    width:46vmax; height:46vmax; left:-15vmax; top:-12vmax;
+    background:radial-gradient(circle, rgba(232,163,182,0.35), transparent 65%);
+    animation: driftA 26s ease-in-out infinite;
+  }
+  .nebula span:nth-child(2){
+    width:52vmax; height:52vmax; right:-18vmax; bottom:-16vmax;
+    background:radial-gradient(circle, rgba(120,140,232,0.30), transparent 65%);
+    animation: driftB 32s ease-in-out infinite;
+  }
+  .nebula span:nth-child(3){
+    width:34vmax; height:34vmax; right:8vmax; top:-10vmax;
+    background:radial-gradient(circle, rgba(232,192,120,0.22), transparent 65%);
+    animation: driftC 22s ease-in-out infinite;
+  }
+
+  @keyframes driftA{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(6vmax,8vmax) scale(1.15);}
+  }
+  @keyframes driftB{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(-7vmax,-6vmax) scale(1.12);}
+  }
+  @keyframes driftC{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(-5vmax,7vmax) scale(0.9);}
+  }
+
+  .moon{
+    position:fixed; z-index:1; top:6%; left:8%;
+    width:74px; height:74px; border-radius:50%;
+    background:radial-gradient(circle at 35% 32%, #fff6e0, var(--gold-soft) 40%, var(--gold-glow) 75%);
+    box-shadow:0 0 40px 12px rgba(232,192,120,0.35), 0 0 90px 30px rgba(232,192,120,0.12);
+    animation: moonFloat 9s ease-in-out infinite;
+  }
+  @keyframes moonFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(14px);}
+  }
+
+  /* floating hearts / fireflies rising through the scene */
+  .fireflies{ position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+  .firefly{
+    position:absolute; bottom:-10%;
+    opacity:0;
+    animation-name: rise;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .firefly svg{ display:block; filter:drop-shadow(0 0 6px currentColor); }
+
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg) scale(0.7); opacity:0; }
+    8%{ opacity:0.9; }
+    50%{ transform:translateY(-55vh) translateX(var(--drift,20px)) rotate(12deg) scale(1); }
+    85%{ opacity:0.75; }
+    100%{ transform:translateY(-115vh) translateX(calc(var(--drift,20px) * -1)) rotate(-10deg) scale(0.6); opacity:0; }
+  }
+
+  /* ---------- Signature element: two lights reaching each other ---------- */
+  .meeting-scene{
+    position:relative;
+    width:min(92vw, 420px);
+    height:64px;
+    margin:0 auto 6px;
+    z-index:2;
+  }
+  .orb{
+    position:absolute; top:50%; width:20px; height:20px; border-radius:50%;
+    transform:translateY(-50%);
+    filter:blur(0.3px);
+  }
+  .orb-a{
+    left:8%;
+    background:radial-gradient(circle at 35% 30%, #fff, var(--rose-glow) 55%, transparent 78%);
+    box-shadow:0 0 18px 6px rgba(232,163,182,0.55);
+    animation: meetA 6s ease-in-out infinite;
+  }
+  .orb-b{
+    right:8%;
+    background:radial-gradient(circle at 35% 30%, #fff, var(--gold-glow) 55%, transparent 78%);
+    box-shadow:0 0 18px 6px rgba(232,192,120,0.55);
+    animation: meetB 6s ease-in-out infinite;
+  }
+  .spark{
+    position:absolute; top:50%; left:50%; width:6px; height:6px; border-radius:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:radial-gradient(circle, #fff, var(--rose-soft));
+    box-shadow:0 0 0px rgba(255,255,255,0);
+    animation: spark 6s ease-in-out infinite;
+  }
+  @keyframes meetA{
+    0%,12%{ left:8%; }
+    45%,55%{ left:calc(50% - 16px); }
+    88%,100%{ left:8%; }
+  }
+  @keyframes meetB{
+    0%,12%{ right:8%; }
+    45%,55%{ right:calc(50% - 16px); }
+    88%,100%{ right:8%; }
+  }
+  @keyframes spark{
+    0%,40%{ transform:translate(-50%,-50%) scale(0); box-shadow:0 0 0 rgba(255,255,255,0); }
+    50%{ transform:translate(-50%,-50%) scale(3.2); box-shadow:0 0 32px 14px rgba(255,236,214,0.85); }
+    62%,100%{ transform:translate(-50%,-50%) scale(0); box-shadow:0 0 0 rgba(255,255,255,0); }
+  }
+
+  /* ---------- Card ---------- */
+  .stage{ position:relative; z-index:3; width:100%; display:flex; flex-direction:column; align-items:center; }
+
+  .card{
+    width:min(92vw, 680px);
+    max-height:min(78vh, 780px);
+    overflow-y:auto;
+    background:linear-gradient(180deg, rgba(28,35,82,0.55), rgba(8,10,28,0.65));
+    -webkit-backdrop-filter:blur(22px) saturate(140%);
+    backdrop-filter:blur(22px) saturate(140%);
+    border:1px solid var(--card-border);
+    border-radius:26px;
+    padding:clamp(28px,5vw,54px) clamp(22px,5vw,56px);
+    box-shadow:
+      0 30px 80px -20px rgba(0,0,0,0.65),
+      0 0 0 1px rgba(255,255,255,0.02) inset,
+      0 1px 0 rgba(255,255,255,0.06) inset;
+    animation: cardIn 1.4s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes cardIn{
+    from{ opacity:0; transform:translateY(28px) scale(0.98); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .card::-webkit-scrollbar{ width:8px; }
+  .card::-webkit-scrollbar-track{ background:transparent; }
+  .card::-webkit-scrollbar-thumb{ background:rgba(232,163,182,0.35); border-radius:8px; }
+
+  .eyebrow{
+    font-family:'Vazirmatn',sans-serif;
+    text-align:center;
+    font-size:13px;
+    letter-spacing:0.12em;
+    color:var(--muted-blue);
+    text-transform:uppercase;
+    margin-bottom:6px;
+    opacity:0.85;
+  }
+
+  h1{
+    font-family:'Vazirmatn',sans-serif;
+    text-align:center;
+    font-weight:800;
+    font-size:clamp(24px,4.6vw,34px);
+    line-height:1.5;
+    background:linear-gradient(90deg, var(--rose-soft), var(--gold-soft) 55%, var(--rose-soft));
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation: shimmer 8s linear infinite;
+    margin:10px 0 30px;
+  }
+  @keyframes shimmer{
+    0%{ background-position:0% center; }
+    100%{ background-position:200% center; }
+  }
+
+  .divider{
+    width:64px; height:2px; margin:0 auto 30px;
+    background:linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+    opacity:0.7;
+    position:relative;
+  }
+  .divider::after{
+    content:'♡';
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-52%);
+    color:var(--rose-glow); font-size:14px; background:transparent;
+  }
+
+  .letter-text p{
+    font-size:clamp(16px,2.1vw,18.5px);
+    line-height:2.15;
+    color:var(--lavender-text);
+    text-align:justify;
+    margin-bottom:1.6em;
+    opacity:0.96;
+  }
+  .letter-text p:first-of-type::first-letter{
+    font-family:'Vazirmatn',sans-serif;
+    font-weight:800;
+    font-size:1.5em;
+    color:var(--gold-soft);
+  }
+
+  .signature{
+    margin-top:38px;
+    padding-top:30px;
+    border-top:1px solid var(--card-border);
+    text-align:center;
+  }
+  .signature p{
+    font-family:'Vazirmatn',sans-serif;
+    font-weight:700;
+    font-size:clamp(17px,2.4vw,21px);
+    line-height:2;
+    color:var(--gold-soft);
+    text-shadow:0 0 24px rgba(232,192,120,0.35);
+    letter-spacing:0.01em;
+  }
+  .signature .stamp{
+    display:inline-block;
+    margin-top:14px;
+    font-family:'Vazirmatn',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.18em;
+    color:var(--muted-blue);
+    text-transform:uppercase;
+  }
+
+  /* ---------- Sound control ---------- */
+  .sound-btn{
+    position:fixed; bottom:22px; left:22px; z-index:20;
+    display:flex; align-items:center; gap:10px;
+    background:rgba(18,23,58,0.65);
+    border:1px solid var(--card-border);
+    -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+    color:var(--lavender-text);
+    padding:10px 16px;
+    border-radius:999px;
+    font-family:'Vazirmatn',sans-serif;
+    font-size:13px;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    box-shadow:0 10px 30px -10px rgba(0,0,0,0.6);
+  }
+  .sound-btn:hover{ transform:translateY(-2px); background:rgba(28,35,82,0.8); }
+  .sound-btn .bars{ display:flex; gap:3px; align-items:flex-end; height:14px; }
+  .sound-btn .bars span{
+    width:3px; background:var(--rose-glow); border-radius:2px;
+    animation:bar 1.1s ease-in-out infinite;
+  }
+  .sound-btn .bars span:nth-child(1){ height:5px; animation-delay:0s; }
+  .sound-btn .bars span:nth-child(2){ height:12px; animation-delay:.15s; }
+  .sound-btn .bars span:nth-child(3){ height:8px; animation-delay:.3s; }
+  .sound-btn.paused .bars span{ animation-play-state:paused; opacity:0.4; }
+  @keyframes bar{
+    0%,100%{ transform:scaleY(0.4); }
+    50%{ transform:scaleY(1); }
+  }
+
+  @media (max-width:520px){
+    .moon{ width:52px; height:52px; }
+    .card{ border-radius:20px; }
+    .sound-btn{ bottom:16px; left:16px; padding:9px 13px; font-size:12px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sky-gradient"></div>
+  <canvas id="stars"></canvas>
+  <div class="nebula"><span></span><span></span><span></span></div>
+  <div class="moon"></div>
+  <div class="fireflies" id="fireflies"></div>
+
+  <button class="sound-btn" id="soundBtn" aria-label="پخش موسیقی">
+    <span class="bars"><span></span><span></span><span></span></span>
+    <span id="soundLabel">موسیقی</span>
+  </button>
+
+  <main class="stage">
+    <div class="meeting-scene">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="spark"></div>
+    </div>
+
+    <section class="card">
+      <div class="eyebrow">برای زهرا</div>
+      <h1>دلتنگیِ عاشقانه‌ی من برای تو</h1>
+      <div class="divider"></div>
+
+      <div class="letter-text">
+        <p>عجیب‌ترین قسمت دوست داشتن با تو اینه که فاصله، نتونسته هیچ‌چیز رو ازمون بگیره.</p>
+
+        <p>هر شب، قبل از اینکه خوابمون ببره، با چند تا جمله، با یه عالمه خیال، برای چند دقیقه انگار فاصله از بین می‌ره. تو اون لحظه‌ها، وقتی می‌گم «بیا نزدیک‌تر»، چشمامو می‌بندم و واقعاً حس می‌کنم روبه‌روم ایستادی. انگار دستات دور گردنم حلقه شده و من فقط دارم لبخندت رو تماشا می‌کنم.</p>
+
+        <p>شاید از بیرون، فقط چند تا پیام باشه؛ اما برای من، اون چند دقیقه واقعی‌ترین قرار دنیاست. جایی که نه کیلومترها بینمون هست، نه صفحه‌ی گوشی... فقط منم و تویی که توی خیال، آروم به هم نزدیک می‌شیم و با هر کلمه، دلتنگی‌هامون رو کمتر می‌کنیم.</p>
+
+        <p>نمی‌دونم اون روزی که بالاخره همدیگه رو می‌بینیم و موقعش رسیده که واقعاً همدیگه رو ببوسیم، بعد از این همه شبِ خیال، اول می‌خندیم، خجالت می‌کشیم یا فقط همدیگه رو محکم بغل می‌کنیم. فقط یه چیز رو مطمئنم... اون اولین بوسه، ادامه‌ی همه‌ی همون بوسه‌هاییه که هر شب با تصور، برای هم ساختیم.</p>
+
+        <p>تا اون روز، بذار هر شب، با چند جمله، فاصله رو گول بزنیم... چون هیچ فاصله‌ای حریف دلتنگیِ عاشقانه‌ی من برای تو نیست.</p>
+      </div>
+
+      <div class="signature">
+        <p>زهرای عزیزتر از جانم،<br>عرفان تا ابد کنارته؛ تو هر شرایط و در هر کاری، مطمئن باش بزرگ‌ترین حامی تو، منم.</p>
+        <span class="stamp">با تمام دلتنگی — عرفان</span>
+      </div>
+    </section>
+  </main>
+
+<script>
+/* ---------------- Starfield ---------------- */
+(function(){
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let w, h, stars = [], shooting = [];
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    const count = Math.floor((w*h)/9000);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      r: Math.random()*1.4 + 0.3,
+      base: Math.random()*0.5 + 0.35,
+      speed: Math.random()*0.02 + 0.005,
+      phase: Math.random()*Math.PI*2
+    }));
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function maybeSpawnShooting(){
+    if(Math.random() < 0.006 && shooting.length < 2){
+      const startX = Math.random()*w*0.6 + w*0.2;
+      shooting.push({
+        x:startX, y: -10,
+        vx: 4 + Math.random()*3,
+        vy: 2.4 + Math.random()*1.6,
+        life: 0, maxLife: 60 + Math.random()*20
+      });
+    }
+  }
+
+  function draw(t){
+    ctx.clearRect(0,0,w,h);
+    for(const s of stars){
+      const tw = s.base + Math.sin(t*s.speed + s.phase)*0.35;
+      ctx.globalAlpha = Math.max(0, Math.min(1, tw));
+      ctx.fillStyle = '#f5efe6';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    maybeSpawnShooting();
+    for(let i = shooting.length-1; i>=0; i--){
+      const sh = shooting[i];
+      sh.x += sh.vx; sh.y += sh.vy; sh.life++;
+      const alpha = 1 - sh.life/sh.maxLife;
+      if(alpha <= 0 || sh.y > h){ shooting.splice(i,1); continue; }
+      const grad = ctx.createLinearGradient(sh.x, sh.y, sh.x - sh.vx*10, sh.y - sh.vy*10);
+      grad.addColorStop(0, `rgba(255,240,220,${alpha})`);
+      grad.addColorStop(1, 'rgba(255,240,220,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(sh.x, sh.y);
+      ctx.lineTo(sh.x - sh.vx*10, sh.y - sh.vy*10);
+      ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ---------------- Floating fireflies / hearts ---------------- */
+(function(){
+  const wrap = document.getElementById('fireflies');
+  const colors = ['#e8a3b6', '#e8c078', '#f0c2cf'];
+  const total = 22;
+
+  function heartSVG(color, size){
+    return `<svg width="${size}" height="${size}" viewBox="0 0 32 29" style="color:${color}">
+      <path fill="currentColor" opacity="0.85" d="M16 28.5s-13-7.9-13-17.1C3 6.1 6.6 2.5 11 2.5c2.5 0 4.6 1.3 5.8 3.3 1.2-2 3.3-3.3 5.8-3.3 4.4 0 8 3.6 8 8.9 0 9.2-13 17.1-13 17.1z"/>
+    </svg>`;
+  }
+
+  for(let i=0;i<total;i++){
+    const el = document.createElement('div');
+    el.className = 'firefly';
+    const size = 8 + Math.random()*14;
+    const color = colors[i % colors.length];
+    el.innerHTML = heartSVG(color, size);
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.setProperty('--drift', (Math.random()*100 - 50) + 'px');
+    const duration = 14 + Math.random()*14;
+    el.style.animationDuration = duration + 's';
+    el.style.animationDelay = (Math.random()*duration) + 's';
+    wrap.appendChild(el);
+  }
+})();
+
+/* ---------------- Ambient instrumental music (Web Audio, generated) ---------------- */
+const MusicEngine = (function(){
+  let ctx, master, convolver, filter, running = false, muted = false;
+  let chordTimer = null, arpTimer = null;
+
+  function makeImpulse(ctxRef, seconds, decay){
+    const rate = ctxRef.sampleRate;
+    const length = rate * seconds;
+    const impulse = ctxRef.createBuffer(2, length, rate);
+    for(let ch=0; ch<2; ch++){
+      const data = impulse.getChannelData(ch);
+      for(let i=0;i<length;i++){
+        data[i] = (Math.random()*2-1) * Math.pow(1 - i/length, decay);
+      }
+    }
+    return impulse;
+  }
+
+  function noteFreq(name){
+    const notes = {
+      'C3':130.81,'D3':146.83,'E3':164.81,'F3':174.61,'G3':196.00,'A3':220.00,'B3':246.94,
+      'C4':261.63,'D4':293.66,'E4':329.63,'F4':349.23,'G4':392.00,'A4':440.00,'B4':493.88,
+      'C5':523.25,'D5':587.33,'E5':659.25,'F5':698.46,'G5':783.99,'A5':880.00
+    };
+    return notes[name] || 220;
+  }
+
+  function playPad(freqs, duration){
+    const now = ctx.currentTime;
+    freqs.forEach((f, idx) => {
+      const osc = ctx.createOscillator();
+      osc.type = idx === 0 ? 'sine' : 'triangle';
+      osc.frequency.value = f;
+      const detuneLFO = ctx.createOscillator();
+      detuneLFO.frequency.value = 0.06 + idx*0.02;
+      const detuneGain = ctx.createGain();
+      detuneGain.gain.value = 4;
+      detuneLFO.connect(detuneGain);
+      detuneGain.connect(osc.detune);
+      detuneLFO.start(now); detuneLFO.stop(now + duration + 2);
+
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(0.06, now + 2.2);
+      g.gain.linearRampToValueAtTime(0.05, now + duration - 2.5);
+      g.gain.linearRampToValueAtTime(0, now + duration + 1.5);
+
+      osc.connect(g);
+      g.connect(filter);
+      osc.start(now);
+      osc.stop(now + duration + 2);
+    });
+  }
+
+  function playPluck(freq, time, dur, vol){
+    const osc = ctx.createOscillator();
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, time);
+    g.gain.linearRampToValueAtTime(vol, time + 0.08);
+    g.gain.exponentialRampToValueAtTime(0.001, time + dur);
+    osc.connect(g);
+    g.connect(filter);
+    osc.start(time);
+    osc.stop(time + dur + 0.05);
+  }
+
+  const progression = [
+    ['A3','C4','E4','A4'],
+    ['F3','A3','C4','F4'],
+    ['C3','E3','G3','C4'],
+    ['G3','B3','D4','G4']
+  ];
+  const arpPools = [
+    ['A4','C5','E4','A3'],
+    ['F4','A4','C4','F3'],
+    ['C4','E4','G4','C3'],
+    ['G4','B4','D5','G3']
+  ];
+
+  let chordIndex = 0;
+  const chordDuration = 7.2;
+
+  function chordLoop(){
+    if(!running) return;
+    const chord = progression[chordIndex % progression.length];
+    playPad(chord.map(noteFreq), chordDuration);
+
+    const pool = arpPools[chordIndex % arpPools.length];
+    let t = ctx.currentTime + 0.6;
+    for(let i=0;i<5;i++){
+      const note = pool[Math.floor(Math.random()*pool.length)];
+      playPluck(noteFreq(note), t, 2.2, 0.028 + Math.random()*0.015);
+      t += 1.1 + Math.random()*0.6;
+    }
+
+    chordIndex++;
+    chordTimer = setTimeout(chordLoop, chordDuration * 1000);
+  }
+
+  function init(){
+    if(ctx) return;
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain();
+    master.gain.value = 0.9;
+
+    filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 1800;
+
+    convolver = ctx.createConvolver();
+    convolver.buffer = makeImpulse(ctx, 3.2, 2.5);
+
+    const dryGain = ctx.createGain(); dryGain.gain.value = 0.6;
+    const wetGain = ctx.createGain(); wetGain.gain.value = 0.5;
+
+    filter.connect(dryGain);
+    filter.connect(convolver);
+    convolver.connect(wetGain);
+    dryGain.connect(master);
+    wetGain.connect(master);
+    master.connect(ctx.destination);
+  }
+
+  function start(){
+    init();
+    if(ctx.state === 'suspended') ctx.resume();
+    if(running) return;
+    running = true;
+    chordIndex = 0;
+    chordLoop();
+  }
+
+  function toggleMute(){
+    if(!ctx) return;
+    muted = !muted;
+    const now = ctx.currentTime;
+    master.gain.cancelScheduledValues(now);
+    master.gain.linearRampToValueAtTime(muted ? 0 : 0.9, now + 0.6);
+    return muted;
+  }
+
+  return { start, toggleMute, isRunning: () => running, isMuted: () => muted };
+})();
+
+(function(){
+  const btn = document.getElementById('soundBtn');
+  const label = document.getElementById('soundLabel');
+  let started = false;
+
+  function tryAutoStart(){
+    if(started) return;
+    started = true;
+    MusicEngine.start();
+    label.textContent = 'موسیقی پخش می‌شود';
+  }
+
+  // Attempt autoplay immediately; browsers may block until first interaction.
+  window.addEventListener('load', () => { setTimeout(tryAutoStart, 300); });
+  ['pointerdown','keydown','touchstart'].forEach(evt => {
+    window.addEventListener(evt, tryAutoStart, { once:true });
+  });
+
+  btn.addEventListener('click', () => {
+    if(!started){ tryAutoStart(); return; }
+    const muted = MusicEngine.toggleMute();
+    btn.classList.toggle('paused', muted);
+    label.textContent = muted ? 'موسیقی' : 'موسیقی پخش می‌شود';
+  });
+})();
+</script>
+</body>
+</html>
